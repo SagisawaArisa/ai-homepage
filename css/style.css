@@ -1,0 +1,635 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #fff;
+    background: url('../assets/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* 30% 透明黑色 */
+    z-index: 0;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+}
+
+.profile {
+    text-align: center;
+    animation: fadeInDown 1s ease;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+}
+
+.profile:hover {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    transform: translateY(-3px);
+}
+
+.profile:hover::before {
+    transform: translateX(100%);
+}
+
+.about p {
+    white-space: pre-line;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.avatar:hover {
+    transform: scale(1.1) rotate(5deg);
+    border-color: rgba(52, 152, 219, 0.5);
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease 0.3s both;
+}
+
+.title {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.3rem;
+    animation: fadeInUp 1s ease 0.6s both;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 1.1rem;
+}
+
+.social-links {
+    margin: 0.5rem 0;
+    animation: fadeInUp 1s ease 0.9s both;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(7px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-links a:hover {
+    color: #3498db;
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.section:hover {
+    backdrop-filter: blur(0px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: width 0.3s ease;
+}
+
+.about {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    text-shadow: 1px 1px 3px rgba(45, 24, 122, 0.6);
+}
+
+
+.section:hover h2::after {
+    width: 50px;
+}
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.skill-category {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.skill-category-title {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-category-title i {
+    color: rgba(52, 152, 219, 0.8);
+    font-size: 1.2rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.skill-tag {
+    background: rgba(52, 152, 219, 0.3);
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: default;
+    backdrop-filter: blur(7px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 为不同类别的技能标签设置不同的颜色 */
+.skill-tag.frontend {
+    background: rgba(52, 152, 219, 0.3);
+}
+
+.skill-tag.programming {
+    background: rgba(46, 204, 113, 0.3);
+}
+
+.skill-tag.database {
+    background: rgba(155, 89, 182, 0.3);
+}
+
+.skill-tag.tools {
+    background: rgba(230, 126, 34, 0.3);
+}
+
+.skill-tag:hover {
+    transform: scale(1.1);
+    backdrop-filter: blur(0px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.skill-tag.frontend:hover {
+    background: rgba(52, 152, 219, 0.5);
+}
+
+.skill-tag.programming:hover {
+    background: rgba(46, 204, 113, 0.5);
+}
+
+.skill-tag.database:hover {
+    background: rgba(155, 89, 182, 0.5);
+}
+
+.skill-tag.tools:hover {
+    background: rgba(230, 126, 34, 0.5);
+}
+
+.timeline {
+    position: relative;
+    padding: 0 1rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+        rgba(52, 152, 219, 0.8),
+        rgba(46, 204, 113, 0.8),
+        rgba(155, 89, 182, 0.8));
+    border-radius: 1px;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+    animation: fadeInLeft 0.5s ease forwards;
+    opacity: 0;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid rgba(52, 152, 219, 0.8);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover::before {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.3rem;
+}
+
+.timeline-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-title i {
+    color: rgba(52, 152, 219, 0.8);
+}
+
+.timeline-content {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 3px rgba(45, 24, 122, 0.6);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(7px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 为不同类型的时间线项添加不同的颜色 */
+.timeline-item.education::before {
+    border-color: rgba(52, 152, 219, 0.8);
+}
+
+.timeline-item.work::before {
+    border-color: rgba(46, 204, 113, 0.8);
+}
+
+.timeline-item.achievement::before {
+    border-color: rgba(155, 89, 182, 0.8);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    animation: fadeInUp 1s ease;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+footer:hover {
+    backdrop-filter: blur(0px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* 自定义滚动条 */
+.section::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+}
+
+.section::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.section::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+/* 动画关键帧 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 鼠标悬停时暂停动画 */
+.interests:hover .interest-cards-container {
+    animation-play-state: paused;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+    
+    .container {
+        height: auto;
+        padding: 1rem;
+    }
+    
+    .content {
+        grid-template-columns: 1fr;
+        max-height: none;
+        overflow: visible;
+        width: 100%;
+    }
+    
+    .name {
+        font-size: 1.6rem;
+    }
+    
+    .section {
+        overflow: visible;
+        height: auto;
+        width: 100%;
+    }
+
+    .profile {
+        padding: 1.5rem;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .social-links a {
+        font-size: 1.1rem;
+        width: 30px;
+        height: 30px;
+    }
+
+    .language-switcher {
+        top: 10px;
+        right: 10px;
+        padding: 0.3rem;
+    }
+
+    .lang-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .interests {
+        width: 100%;
+        overflow: visible;
+    }
+
+    .interest-cards-container {
+        animation: none; /* 移动端禁用自动滚动 */
+    }
+
+    .blog-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 平板适配 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .content {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: calc(100vh - 250px);
+        width: 100%;
+    }
+
+    .interests {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    .profile {
+        padding: 1.5rem 2rem;
+        max-width: 90%;
+    }
+}
+
+.language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInDown 1s ease;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.lang-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.lang-btn.active {
+    background: rgba(52, 152, 219, 0.3);
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 恢复博客链接样式 */
+.blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(52, 152, 219, 0.3);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.blog-link i {
+    font-size: 1.1rem;
+}
+
+.blog-link:hover {
+    background: rgba(52, 152, 219, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+} 
